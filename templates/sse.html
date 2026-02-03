@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block links %}
+    <script src="/static/sse.js"></script>
+{% endblock %}
+
+{% block nav %}
+    <a href="/">Main page is here!</a>
+    <a href="/ws/">Web-Sockets demo is here!</a>
+{% endblock %}
+
+{% block content %}
+    SSE
+    <div id="sse-container">
+
+    </div>
+{% endblock%}

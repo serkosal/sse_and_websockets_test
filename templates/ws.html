@@ -1,9 +1,5 @@
 {% extends "base.html" %}
 
-{% block links %}
-    <script src="/static/ws.js"></script>
-{% endblock %}
-
 {% block nav %}
     <a href="/sse/">SSE demo is here!</a>
     <a href="/">Main page is here!</a>
@@ -15,3 +11,7 @@
         
     </div>
 {% endblock%}
+
+{% block bodyend %}
+    <script src="/static/ws.js"></script>
+{% endblock %}

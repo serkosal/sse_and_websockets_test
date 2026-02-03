@@ -6,9 +6,6 @@
     <title>{{title}}</title>
 
     <link rel="stylesheet" href="/static/style.css">
-
-    {% block links %}
-    {% endblock %}
 </head>
 <body>
 
@@ -24,5 +21,8 @@
         {% block content %}
         {% endblock%}
     </main>
+
+    {% block bodyend %}
+    {% endblock %}
 </body>
 </html>

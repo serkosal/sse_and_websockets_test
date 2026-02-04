@@ -1,9 +1,8 @@
 from asyncio import sleep
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, WebSocket
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from fastapi.templating import Jinja2Templates
 
@@ -12,14 +11,6 @@ import requests
 app = FastAPI()
 
 app.mount('/static', StaticFiles(directory='static'), name='static')
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 templates = Jinja2Templates(directory="templates")
 
@@ -76,3 +67,16 @@ async def ws(req: Request):
     return templates.TemplateResponse(
         request=req, name='ws.html', context={"title": "Web-Sockets demo"}
     )
+
+@app.websocket("/ws/run")
+async def ws_run(ws: WebSocket):
+    await ws.accept()
+
+    for i in range(10):
+        await ws.send_text(str(i))
+        await sleep(2)
+
+    await ws.close()
+    
+
+# endregion 
